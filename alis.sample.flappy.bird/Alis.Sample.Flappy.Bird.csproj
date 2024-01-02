@@ -16,4 +16,25 @@
     <ItemGroup>
         <PackageReference Include="Alis" Version="*" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\CHANGELOG.md">
+        <Link>.Config\CHANGELOG.md</Link>
+      </Content>
+      <Content Include="..\code_of_conduct.md">
+        <Link>.Config\code_of_conduct.md</Link>
+      </Content>
+      <Content Include="..\Directory.Build.props">
+        <Link>.Config\Directory.Build.props</Link>
+      </Content>
+      <Content Include="..\funding.yml">
+        <Link>.Config\funding.yml</Link>
+      </Content>
+      <Content Include="..\licence.md">
+        <Link>.Config\licence.md</Link>
+      </Content>
+      <Content Include="..\readme.md">
+        <Link>.Config\readme.md</Link>
+      </Content>
+    </ItemGroup>
 </Project>
