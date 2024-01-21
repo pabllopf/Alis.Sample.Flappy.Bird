@@ -42,6 +42,7 @@ namespace Alis.Sample.Flappy.Bird
     /// <seealso cref="Component" />
     public class BirdController : Component
     {
+        
         /// <summary>
         ///     The audio source
         /// </summary>
