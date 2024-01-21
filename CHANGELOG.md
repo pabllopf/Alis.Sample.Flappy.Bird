@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.0.3] - 2024-01-21
+### :sparkles: New Features
+- [`2d21823`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/2d21823e1028d21ae2964534400b2240b192fe4b) - add new files to asset folder and new alis version 0.2.5 *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+
 ## [v0.0.2] - 2024-01-02
 ### :bug: Bug Fixes
 - [`a4a025f`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/a4a025fa0e98e966363130f3c85053a87fa29035) - add new .config folder to sln *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -19,3 +24,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [v0.0.1]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.0...v0.0.1
 [v0.0.2]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.1...v0.0.2
+[v0.0.3]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.2...v0.0.3
