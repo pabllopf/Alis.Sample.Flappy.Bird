@@ -5,7 +5,7 @@
 //                              ░█─░█ ░█▄▄█ ▄█▄ ░█▄▄▄█
 // 
 //  --------------------------------------------------------------------------
-//  File: ${File.FileName}
+//  File: PipelineController.cs
 // 
 //  Author: Pablo Perdomo Falcón
 //  Web:https://www.pabllopf.dev/
@@ -28,6 +28,7 @@
 //  --------------------------------------------------------------------------
 
 using System;
+using System.Security.Cryptography;
 using Alis.Core.Aspect.Math;
 using Alis.Core.Aspect.Math.Vector;
 using Alis.Core.Ecs.Component;
@@ -36,48 +37,58 @@ using Alis.Core.Ecs.Component.Collider;
 namespace Alis.Sample.Flappy.Bird
 {
     /// <summary>
-    /// The pipeline controller class
+    ///     The pipeline controller class
     /// </summary>
-    /// <seealso cref="Component"/>
+    /// <seealso cref="Component" />
     public class PipelineController : Component
     {
         /// <summary>
-        /// The random height
+        ///     The random height
         /// </summary>
         private static int randomHeight;
-        
+
         /// <summary>
-        /// The random direction
+        ///     The random direction
         /// </summary>
         private static int randomDirection;
-        
+
         /// <summary>
-        /// The generated
+        ///     The generated
         /// </summary>
         private static bool generated;
-        
+
         /// <summary>
-        /// The box collider
+        ///     The velocity
+        /// </summary>
+        public static float velocity = 10;
+
+        /// <summary>
+        ///     The is stop
+        /// </summary>
+        public static bool IsStop;
+
+        /// <summary>
+        ///     The box collider
         /// </summary>
         private BoxCollider boxCollider;
 
         /// <summary>
-        /// The pos origin
+        ///     The data
         /// </summary>
-        private Transform posOrigin;
+        private byte[] data;
 
         /// <summary>
-        /// The velocity
-        /// </summary>
-        private static float velocity = 10;
-
-        /// <summary>
-        /// The factor velocity
+        ///     The factor velocity
         /// </summary>
         private float factorVelocity = 1.1f;
 
         /// <summary>
-        /// Ons the init
+        ///     The pos origin
+        /// </summary>
+        private Transform posOrigin;
+
+        /// <summary>
+        ///     Ons the init
         /// </summary>
         public override void OnInit()
         {
@@ -85,24 +96,43 @@ namespace Alis.Sample.Flappy.Bird
             boxCollider = GameObject.Get<BoxCollider>();
             boxCollider.LinearVelocity = new Vector2(-velocity, 0);
 
-            generated = true;
-            randomHeight = new Random().Next(0, 100);
-            randomDirection = new Random().Next(0, 2);
+            velocity = 10;
+            factorVelocity = 1.1f;
+
+            using (RandomNumberGenerator randomGenerator = RandomNumberGenerator.Create())
+            {
+                data = new byte[16];
+                randomGenerator.GetBytes(data);
+            }
+
+            randomHeight = Math.Abs(BitConverter.ToInt32(data, 0) % 100);
+            randomDirection = Math.Abs(BitConverter.ToInt32(data, 4) % 2);
             Console.WriteLine($"{GameObject.Name} NUM={randomHeight} Direction={randomDirection}");
+
+            generated = true;
+            IsStop = false;
         }
 
         /// <summary>
-        /// Ons the update
+        ///     Ons the update
         /// </summary>
         public override void OnUpdate()
         {
-            if (GameObject.Transform.Position.X <= -27)
+            if (IsStop && (velocity != 0))
+            {
+                velocity = 0;
+                factorVelocity = 0;
+                boxCollider.LinearVelocity = new Vector2(0, 0);
+                return;
+            }
+
+            if ((GameObject.Transform.Position.X <= -27) && !IsStop)
             {
                 if (!generated)
                 {
                     generated = true;
-                    randomHeight = new Random().Next(10, 75);
-                    randomDirection = new Random().Next(0, 2);
+                    randomHeight = Math.Abs(BitConverter.ToInt32(data, 0) % 100);
+                    randomDirection = Math.Abs(BitConverter.ToInt32(data, 4) % 2);
                     Console.WriteLine($"{GameObject.Name} NUM={randomHeight} Direction={randomDirection} velocity={velocity}");
                 }
 
@@ -127,11 +157,11 @@ namespace Alis.Sample.Flappy.Bird
         }
 
         /// <summary>
-        /// Ons the after update
+        ///     Ons the after update
         /// </summary>
         public override void OnAfterUpdate()
         {
-            if (generated)
+            if (generated && !IsStop)
             {
                 velocity *= factorVelocity;
                 generated = false;

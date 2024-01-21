@@ -28,8 +28,14 @@
 //  --------------------------------------------------------------------------
 
 using System;
+using Alis.Core.Aspect.Data.Resource;
+using Alis.Core.Aspect.Math.Vector;
 using Alis.Core.Ecs.Component;
+using Alis.Core.Ecs.Component.Audio;
+using Alis.Core.Ecs.Component.Collider;
+using Alis.Core.Ecs.Component.Render;
 using Alis.Core.Ecs.Entity.GameObject;
+using Alis.Core.Physic.Dynamics;
 
 namespace Alis.Sample.Flappy.Bird
 {
@@ -40,6 +46,41 @@ namespace Alis.Sample.Flappy.Bird
     public class DeathZone : Component
     {
         /// <summary>
+        ///     The is death
+        /// </summary>
+        public static bool isDeath;
+
+        /// <summary>
+        ///     The time delta
+        /// </summary>
+        public static float timeDelta = 10.0f;
+
+        /// <summary>
+        ///     Ons the init
+        /// </summary>
+        public override void OnInit()
+        {
+            isDeath = false;
+            timeDelta = 100f;
+        }
+
+        /// <summary>
+        ///     Ons the update
+        /// </summary>
+        public override void OnUpdate()
+        {
+            if (isDeath)
+            {
+                timeDelta -= 0.01f;
+                if (timeDelta <= 0.0f)
+                {
+                    VideoGame.Instance.SceneManager.LoadScene("Main Menu");
+                    Console.WriteLine("RESET LEVEL");
+                }
+            }
+        }
+
+        /// <summary>
         ///     Ons the collision enter using the specified game object
         /// </summary>
         /// <param name="gameObject">The game object</param>
@@ -47,7 +88,28 @@ namespace Alis.Sample.Flappy.Bird
         {
             if (gameObject.Tag == "Player")
             {
-                Console.WriteLine($"Player dead by '{this.GameObject.Name}'");
+                Console.WriteLine($"Player dead by '{GameObject.Name}'");
+
+                if (gameObject.Contains<BirdController>() && !gameObject.Get<BirdController>().IsDead)
+                {
+                    gameObject.Get<AudioSource>().AudioClip = new AudioClip(AssetManager.Find("die.wav"));
+                    gameObject.Get<AudioSource>().Play();
+
+                    gameObject.Remove(gameObject.Get<BirdController>());
+                    Console.WriteLine("Player remove bird controller");
+
+                    gameObject.Get<BoxCollider>().Body.Rotation = 45f;
+                    gameObject.Get<BoxCollider>().Body.LinearVelocity = new Vector2(0, 7);
+                    gameObject.Get<BoxCollider>().IsTrigger = true;
+                    gameObject.Get<BoxCollider>().Body.BodyType = BodyType.Kinematic;
+
+                    gameObject.Remove(gameObject.Get<Animator>());
+
+                    PipelineController.IsStop = true;
+
+
+                    isDeath = true;
+                }
             }
         }
     }

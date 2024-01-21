@@ -28,7 +28,6 @@
 //  --------------------------------------------------------------------------
 
 using System;
-using Alis.Core.Aspect.Base.Mapping;
 using Alis.Core.Ecs.Component;
 using Alis.Core.Ecs.Component.Audio;
 using Alis.Core.Ecs.Entity.GameObject;
@@ -42,16 +41,19 @@ namespace Alis.Sample.Flappy.Bird
     public class CounterController : Component
     {
         /// <summary>
+        ///     The audio source
+        /// </summary>
+        private AudioSource audioSource;
+
+        /// <summary>
+        ///     The is enter
+        /// </summary>
+        private bool isEnter;
+
+        /// <summary>
         ///     Gets or sets the value of the counter
         /// </summary>
         public int Counter { get; set; }
-
-        private bool isEnter = false;
-        
-        /// <summary>
-        /// The audio source
-        /// </summary>
-        private AudioSource audioSource;
 
         /// <summary>
         ///     Increments this instance
@@ -76,16 +78,20 @@ namespace Alis.Sample.Flappy.Bird
         public override string ToString() => Counter.ToString();
 
         /// <summary>
-        /// Ons the init
+        ///     Ons the init
         /// </summary>
         public override void OnInit()
         {
-           audioSource = GameObject.Get<AudioSource>();
+            audioSource = GameObject.Get<AudioSource>();
         }
 
+        /// <summary>
+        ///     Ons the collision enter using the specified game object
+        /// </summary>
+        /// <param name="gameObject">The game object</param>
         public override void OnCollisionEnter(IGameObject gameObject)
         {
-            if (gameObject.Tag == "Player" && !isEnter)
+            if ((gameObject.Tag == "Player") && !isEnter)
             {
                 Increment();
                 audioSource.Play();
@@ -94,9 +100,13 @@ namespace Alis.Sample.Flappy.Bird
             }
         }
 
+        /// <summary>
+        ///     Ons the collision exit using the specified game object
+        /// </summary>
+        /// <param name="gameObject">The game object</param>
         public override void OnCollisionExit(IGameObject gameObject)
         {
-            if (gameObject.Tag == "Player" && isEnter)
+            if ((gameObject.Tag == "Player") && isEnter)
             {
                 isEnter = false;
             }

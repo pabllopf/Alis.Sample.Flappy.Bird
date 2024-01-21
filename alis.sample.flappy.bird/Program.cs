@@ -27,7 +27,7 @@
 // 
 //  --------------------------------------------------------------------------
 
-using Alis.Core.Aspect.Data;
+using Alis.Core.Aspect.Data.Resource;
 using Alis.Core.Aspect.Math.Definition;
 using Alis.Core.Ecs.Component.Audio;
 using Alis.Core.Ecs.Component.Collider;
@@ -58,7 +58,7 @@ namespace Alis.Sample.Flappy.Bird
                         .Author("Pablo Perdomo Falcón")
                         .Description("Flappy Bird game.")
                         .License("GNU General Public License v3.0")
-                        .Icon(AssetManager.Find("app.png"))
+                        .Icon(AssetManager.Find("app.bmp"))
                         .Build())
                     .Audio(audio => audio
                         .Build())
@@ -93,11 +93,10 @@ namespace Alis.Sample.Flappy.Bird
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite
                                 .Builder()
-                                .SetTexture(AssetManager.Find("background-day.png"))
+                                .SetTexture(AssetManager.Find("background-day.bmp"))
                                 .Depth(0)
                                 .Build())
                             .Build())
-                        
                         .Add<GameObject>(gameObject => gameObject
                             .Name("UI")
                             .AddComponent<Canvas>(canvas => canvas
@@ -117,7 +116,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite
                                 .Builder()
-                                .SetTexture(AssetManager.Find("base.png"))
+                                .SetTexture(AssetManager.Find("base.bmp"))
                                 .Depth(1)
                                 .Build())
                             .AddComponent(new FloorAnimation())
@@ -135,7 +134,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite
                                 .Builder()
-                                .SetTexture(AssetManager.Find("message.png"))
+                                .SetTexture(AssetManager.Find("message.bmp"))
                                 .Depth(2)
                                 .Build())
                             .AddComponent(new MainMenuController())
@@ -165,7 +164,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite
                                 .Builder()
-                                .SetTexture(AssetManager.Find("bluebird-down_flap.png"))
+                                .SetTexture(AssetManager.Find("bluebird-down_flap.bmp"))
                                 .Depth(4)
                                 .Build())
                             .AddComponent<Animator>(animator => animator
@@ -174,13 +173,13 @@ namespace Alis.Sample.Flappy.Bird
                                     .Name("Fly")
                                     .Speed(0.2f)
                                     .AddFrame(frame1 => frame1
-                                        .FilePath(AssetManager.Find("bluebird-down_flap.png"))
+                                        .FilePath(AssetManager.Find("bluebird-down_flap.bmp"))
                                         .Build())
                                     .AddFrame(frame2 => frame2
-                                        .FilePath(AssetManager.Find("bluebird-mid_flap.png"))
+                                        .FilePath(AssetManager.Find("bluebird-mid_flap.bmp"))
                                         .Build())
                                     .AddFrame(frame3 => frame3
-                                        .FilePath(AssetManager.Find("bluebird-up_flap.png"))
+                                        .FilePath(AssetManager.Find("bluebird-up_flap.bmp"))
                                         .Build())
                                     .Build())
                                 .Build())
@@ -218,7 +217,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite
                                 .Builder()
-                                .SetTexture(AssetManager.Find("background-day.png"))
+                                .SetTexture(AssetManager.Find("background-day.bmp"))
                                 .Depth(0)
                                 .Build())
                             .Build())
@@ -235,7 +234,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite
                                 .Builder()
-                                .SetTexture(AssetManager.Find("base.png"))
+                                .SetTexture(AssetManager.Find("base.bmp"))
                                 .Depth(2)
                                 .Build())
                             .AddComponent(new FloorAnimation())
@@ -310,7 +309,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .Scale(1f, 1.0f)
                                 .Build())
                             .Build())
-                        
+
                         ////////////////////////////////////////
                         // GAME SCENE: PIPELINE UP
                         ////////////////////////////////////////
@@ -323,7 +322,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite
                                 .Builder()
-                                .SetTexture(AssetManager.Find("pipe-green.png"))
+                                .SetTexture(AssetManager.Find("pipe-green.bmp"))
                                 .Depth(1)
                                 .Build())
                             .AddComponent<BoxCollider>(boxCollider => boxCollider
@@ -344,7 +343,7 @@ namespace Alis.Sample.Flappy.Bird
                             .AddComponent(new PipelineController())
                             .AddComponent(new DeathZone())
                             .Build())
-                        
+
                         ////////////////////////////////////////
                         // GAME SCENE: PIPELINE MIDDLE
                         ////////////////////////////////////////
@@ -381,7 +380,7 @@ namespace Alis.Sample.Flappy.Bird
                             .AddComponent(new PipelineController())
                             .AddComponent(new CounterController())
                             .Build())
-                        
+
                         ////////////////////////////////////////
                         // GAME SCENE: PIPELINE DOWN
                         ////////////////////////////////////////
@@ -394,7 +393,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite
                                 .Builder()
-                                .SetTexture(AssetManager.Find("pipe-green.png"))
+                                .SetTexture(AssetManager.Find("pipe-green.bmp"))
                                 .Depth(1)
                                 .Build())
                             .AddComponent<BoxCollider>(boxCollider => boxCollider
@@ -415,7 +414,6 @@ namespace Alis.Sample.Flappy.Bird
                             .AddComponent(new PipelineController())
                             .AddComponent(new DeathZone())
                             .Build())
-                        
 
                         ////////////////////////////////////////
                         // GAME SCENE: BIRD
@@ -430,7 +428,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .Build())
                             .AddComponent<Sprite>(sprite => sprite
                                 .Builder()
-                                .SetTexture(AssetManager.Find("bluebird-down_flap.png"))
+                                .SetTexture(AssetManager.Find("bluebird-down_flap.bmp"))
                                 .Depth(4)
                                 .Build())
                             .AddComponent<AudioSource>(audioSource => audioSource
@@ -446,13 +444,13 @@ namespace Alis.Sample.Flappy.Bird
                                     .Name("Fly")
                                     .Speed(0.2f)
                                     .AddFrame(frame1 => frame1
-                                        .FilePath(AssetManager.Find("bluebird-down_flap.png"))
+                                        .FilePath(AssetManager.Find("bluebird-down_flap.bmp"))
                                         .Build())
                                     .AddFrame(frame2 => frame2
-                                        .FilePath(AssetManager.Find("bluebird-mid_flap.png"))
+                                        .FilePath(AssetManager.Find("bluebird-mid_flap.bmp"))
                                         .Build())
                                     .AddFrame(frame3 => frame3
-                                        .FilePath(AssetManager.Find("bluebird-up_flap.png"))
+                                        .FilePath(AssetManager.Find("bluebird-up_flap.bmp"))
                                         .Build())
                                     .Build())
                                 .Build())
