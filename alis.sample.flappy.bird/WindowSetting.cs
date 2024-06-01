@@ -5,7 +5,7 @@
 //                              ░█─░█ ░█▄▄█ ▄█▄ ░█▄▄▄█
 // 
 //  --------------------------------------------------------------------------
-//  File:MainMenuController.cs
+//  File:WindowSetting.cs
 // 
 //  Author:Pablo Perdomo Falcón
 //  Web:https://www.pabllopf.dev/
@@ -27,27 +27,38 @@
 // 
 //  --------------------------------------------------------------------------
 
-using Alis.Core.Aspect.Data.Mapping;
-using Alis.Core.Ecs.Component;
+using Alis.Core.Aspect.Data.Json;
+using Alis.Core.Graphic;
 
 namespace Alis.Sample.Flappy.Bird
 {
     /// <summary>
-    ///     The main menu controller class
+    /// The window setting class
     /// </summary>
-    /// <seealso cref="AComponent" />
-    public class MainMenuController : AComponent
+    public class WindowSetting 
     {
         /// <summary>
-        ///     Ons the press key using the specified key
+        /// Gets or sets the value of the window
         /// </summary>
-        /// <param name="key">The key</param>
-        public override void OnPressKey(KeyCodes key)
+        [JsonPropertyName("_Window_")]
+        public Window Window { get; set; }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WindowSetting"/> class
+        /// </summary>
+        public WindowSetting()
         {
-            if (key == KeyCodes.Space)
-            {
-                Context.SceneManager.LoadScene("Game Scene");
-            }
+            Window = new Window();
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WindowSetting"/> class
+        /// </summary>
+        /// <param name="window">The window</param>
+        [JsonConstructor]
+        public WindowSetting(Window window)
+        {
+            Window = window;
         }
     }
 }

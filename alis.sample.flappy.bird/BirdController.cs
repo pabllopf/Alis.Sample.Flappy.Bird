@@ -5,9 +5,9 @@
 //                              ░█─░█ ░█▄▄█ ▄█▄ ░█▄▄▄█
 // 
 //  --------------------------------------------------------------------------
-//  File: BirdController.cs
+//  File:BirdController.cs
 // 
-//  Author: Pablo Perdomo Falcón
+//  Author:Pablo Perdomo Falcón
 //  Web:https://www.pabllopf.dev/
 // 
 //  Copyright (c) 2021 GNU General Public License v3.0
@@ -27,8 +27,8 @@
 // 
 //  --------------------------------------------------------------------------
 
-using System;
-using Alis.Core.Aspect.Base.Mapping;
+using Alis.Core.Aspect.Data.Mapping;
+using Alis.Core.Aspect.Logging;
 using Alis.Core.Aspect.Math.Vector;
 using Alis.Core.Ecs.Component;
 using Alis.Core.Ecs.Component.Audio;
@@ -39,24 +39,24 @@ namespace Alis.Sample.Flappy.Bird
     /// <summary>
     ///     The bird controller class
     /// </summary>
-    /// <seealso cref="Component" />
-    public class BirdController : Component
+    /// <seealso cref="AComponent" />
+    public class BirdController : AComponent
     {
         /// <summary>
         ///     The audio source
         /// </summary>
         private AudioSource audioSource;
-
+        
         /// <summary>
         ///     The box collider
         /// </summary>
         private BoxCollider boxCollider;
-
+        
         /// <summary>
         ///     Gets or sets the value of the is dead
         /// </summary>
         public bool IsDead { get; set; } = false;
-
+        
         /// <summary>
         ///     Ons the init
         /// </summary>
@@ -65,17 +65,17 @@ namespace Alis.Sample.Flappy.Bird
             audioSource = GameObject.Get<AudioSource>();
             boxCollider = GameObject.Get<BoxCollider>();
         }
-
+        
         /// <summary>
         ///     Ons the press key using the specified key
         /// </summary>
         /// <param name="key">The key</param>
-        public override void OnPressKey(SdlKeycode key)
+        public override void OnPressKey(KeyCodes key)
         {
-            if (key == SdlKeycode.SdlkSpace)
+            if (key == KeyCodes.Space)
             {
-                boxCollider.Body.LinearVelocity = new Vector2(0, -17f);
-                Console.WriteLine("Go up!");
+                boxCollider.Body.LinearVelocity = new Vector2(0, -8f);
+                Logger.Info("Go up!");
             }
         }
     }

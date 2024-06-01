@@ -5,9 +5,9 @@
 //                              ░█─░█ ░█▄▄█ ▄█▄ ░█▄▄▄█
 // 
 //  --------------------------------------------------------------------------
-//  File: DeathZone.cs
+//  File:DeathZone.cs
 // 
-//  Author: Pablo Perdomo Falcón
+//  Author:Pablo Perdomo Falcón
 //  Web:https://www.pabllopf.dev/
 // 
 //  Copyright (c) 2021 GNU General Public License v3.0
@@ -27,14 +27,13 @@
 // 
 //  --------------------------------------------------------------------------
 
-using System;
-using Alis.Core.Aspect.Data.Resource;
+using Alis.Core.Aspect.Logging;
 using Alis.Core.Aspect.Math.Vector;
 using Alis.Core.Ecs.Component;
 using Alis.Core.Ecs.Component.Audio;
 using Alis.Core.Ecs.Component.Collider;
 using Alis.Core.Ecs.Component.Render;
-using Alis.Core.Ecs.Entity.GameObject;
+using Alis.Core.Ecs.Entity;
 using Alis.Core.Physic.Dynamics;
 
 namespace Alis.Sample.Flappy.Bird
@@ -42,73 +41,73 @@ namespace Alis.Sample.Flappy.Bird
     /// <summary>
     ///     The death zone class
     /// </summary>
-    /// <seealso cref="Component" />
-    public class DeathZone : Component
+    /// <seealso cref="AComponent" />
+    public class DeathZone : AComponent
     {
         /// <summary>
         ///     The is death
         /// </summary>
-        public static bool isDeath;
-
+        public static bool IsDeath;
+        
         /// <summary>
         ///     The time delta
         /// </summary>
-        public static float timeDelta = 10.0f;
-
+        public static float TimeDelta = 10.0f;
+        
         /// <summary>
         ///     Ons the init
         /// </summary>
         public override void OnInit()
         {
-            isDeath = false;
-            timeDelta = 100f;
+            IsDeath = false;
+            TimeDelta = 10.0f;
         }
-
+        
         /// <summary>
         ///     Ons the update
         /// </summary>
         public override void OnUpdate()
         {
-            if (isDeath)
+            if (IsDeath)
             {
-                timeDelta -= 0.01f;
-                if (timeDelta <= 0.0f)
+                TimeDelta -= 1f * Context.TimeManager.DeltaTime;
+                if (TimeDelta <= 0.0f)
                 {
-                    VideoGame.Instance.SceneManager.LoadScene("Main Menu");
-                    Console.WriteLine("RESET LEVEL");
+                    Context.SceneManager.LoadScene("Main Menu");
+                    Logger.Info("RESET LEVEL");
                 }
             }
         }
-
+        
         /// <summary>
         ///     Ons the collision enter using the specified game object
         /// </summary>
         /// <param name="gameObject">The game object</param>
-        public override void OnCollisionEnter(IGameObject gameObject)
+        public override void OnCollisionEnter(GameObject gameObject)
         {
             if (gameObject.Tag == "Player")
             {
-                Console.WriteLine($"Player dead by '{GameObject.Name}'");
-
+                Logger.Info($"Player dead by '{GameObject.Name}'");
+                
                 if (gameObject.Contains<BirdController>() && !gameObject.Get<BirdController>().IsDead)
                 {
-                    gameObject.Get<AudioSource>().AudioClip = new AudioClip(AssetManager.Find("die.wav"));
+                    gameObject.Get<AudioSource>().AudioClip = new AudioClip("die.wav");
                     gameObject.Get<AudioSource>().Play();
-
+                    
                     gameObject.Remove(gameObject.Get<BirdController>());
-                    Console.WriteLine("Player remove bird controller");
-
+                    Logger.Info("Player remove bird controller");
+                    
                     gameObject.Get<BoxCollider>().Body.Rotation = 45f;
                     gameObject.Get<BoxCollider>().Body.LinearVelocity = new Vector2(0, 7);
                     gameObject.Get<BoxCollider>().IsTrigger = true;
                     gameObject.Get<BoxCollider>().Body.BodyType = BodyType.Kinematic;
-
+                    
                     gameObject.Remove(gameObject.Get<Animator>());
-
+                    
                     PipelineController.IsStop = true;
-
-
-                    isDeath = true;
+                    
+                    
+                    IsDeath = true;
                 }
             }
         }

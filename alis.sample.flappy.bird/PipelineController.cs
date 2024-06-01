@@ -5,9 +5,9 @@
 //                              ░█─░█ ░█▄▄█ ▄█▄ ░█▄▄▄█
 // 
 //  --------------------------------------------------------------------------
-//  File: PipelineController.cs
+//  File:PipelineController.cs
 // 
-//  Author: Pablo Perdomo Falcón
+//  Author:Pablo Perdomo Falcón
 //  Web:https://www.pabllopf.dev/
 // 
 //  Copyright (c) 2021 GNU General Public License v3.0
@@ -29,64 +29,65 @@
 
 using System;
 using System.Security.Cryptography;
-using Alis.Core.Aspect.Math;
+using Alis.Core.Aspect.Logging;
 using Alis.Core.Aspect.Math.Vector;
 using Alis.Core.Ecs.Component;
 using Alis.Core.Ecs.Component.Collider;
+using Alis.Core.Physic;
 
 namespace Alis.Sample.Flappy.Bird
 {
     /// <summary>
     ///     The pipeline controller class
     /// </summary>
-    /// <seealso cref="Component" />
-    public class PipelineController : Component
+    /// <seealso cref="AComponent" />
+    public class PipelineController : AComponent
     {
         /// <summary>
         ///     The random height
         /// </summary>
-        private static int randomHeight;
-
+        private static int _randomHeight;
+        
         /// <summary>
         ///     The random direction
         /// </summary>
-        private static int randomDirection;
-
+        private static int _randomDirection;
+        
         /// <summary>
         ///     The generated
         /// </summary>
-        private static bool generated;
-
+        private static bool _generated;
+        
         /// <summary>
         ///     The velocity
         /// </summary>
-        public static float velocity = 10;
-
+        public float Velocity = 3;
+        
         /// <summary>
         ///     The is stop
         /// </summary>
         public static bool IsStop;
-
+        
         /// <summary>
         ///     The box collider
         /// </summary>
         private BoxCollider boxCollider;
-
+        
         /// <summary>
         ///     The data
         /// </summary>
         private byte[] data;
-
+        
         /// <summary>
         ///     The factor velocity
         /// </summary>
         private float factorVelocity = 1.1f;
-
+        
         /// <summary>
         ///     The pos origin
         /// </summary>
         private Transform posOrigin;
-
+        
         /// <summary>
         ///     Ons the init
         /// </summary>
@@ -94,77 +95,80 @@ namespace Alis.Sample.Flappy.Bird
         {
             posOrigin = GameObject.Transform;
             boxCollider = GameObject.Get<BoxCollider>();
-            boxCollider.LinearVelocity = new Vector2(-velocity, 0);
-
-            velocity = 10;
+            
+            Velocity = 3;
             factorVelocity = 1.1f;
-
+            
+            boxCollider.LinearVelocity = new Vector2(-Velocity, 0);
+            
+            
+            
             using (RandomNumberGenerator randomGenerator = RandomNumberGenerator.Create())
             {
                 data = new byte[16];
                 randomGenerator.GetBytes(data);
             }
-
-            randomHeight = Math.Abs(BitConverter.ToInt32(data, 0) % 100);
-            randomDirection = Math.Abs(BitConverter.ToInt32(data, 4) % 2);
-            Console.WriteLine($"{GameObject.Name} NUM={randomHeight} Direction={randomDirection}");
-
-            generated = true;
+            
+            _randomHeight = Math.Abs(BitConverter.ToInt32(data, 0) % 100);
+            _randomDirection = Math.Abs(BitConverter.ToInt32(data, 4) % 2);
+            Logger.Info($"{GameObject.Name} NUM={_randomHeight} Direction={_randomDirection}");
+            
+            _generated = true;
             IsStop = false;
         }
-
+        
         /// <summary>
         ///     Ons the update
         /// </summary>
         public override void OnUpdate()
         {
-            if (IsStop && (velocity != 0))
+            if (IsStop && (Velocity != 0))
             {
-                velocity = 0;
+                Velocity = 0;
                 factorVelocity = 0;
                 boxCollider.LinearVelocity = new Vector2(0, 0);
                 return;
             }
-
+            
             if ((GameObject.Transform.Position.X <= -27) && !IsStop)
             {
-                if (!generated)
+                if (!_generated)
                 {
-                    generated = true;
-                    randomHeight = Math.Abs(BitConverter.ToInt32(data, 0) % 100);
-                    randomDirection = Math.Abs(BitConverter.ToInt32(data, 4) % 2);
-                    Console.WriteLine($"{GameObject.Name} NUM={randomHeight} Direction={randomDirection} velocity={velocity}");
+                    _generated = true;
+                    _randomHeight = Math.Abs(BitConverter.ToInt32(data, 0) % 100);
+                    _randomDirection = Math.Abs(BitConverter.ToInt32(data, 4) % 2);
+                    Logger.Info($"{GameObject.Name} NUM={_randomHeight} Direction={_randomDirection} velocity={Velocity}");
                 }
-
-                switch (randomDirection)
+                
+                switch (_randomDirection)
                 {
                     case 0:
                     {
-                        Vector2 newPos = new Vector2(posOrigin.Position.X, posOrigin.Position.Y + randomHeight);
+                        Vector2 newPos = new Vector2(posOrigin.Position.X, posOrigin.Position.Y + _randomHeight);
                         boxCollider.Body.Position = newPos;
-                        boxCollider.LinearVelocity = new Vector2(-velocity, 0);
+                        boxCollider.LinearVelocity = new Vector2(-Velocity, 0);
                         break;
                     }
                     case 1:
                     {
-                        Vector2 newPos = new Vector2(posOrigin.Position.X, posOrigin.Position.Y - randomHeight);
+                        Vector2 newPos = new Vector2(posOrigin.Position.X, posOrigin.Position.Y - _randomHeight);
                         boxCollider.Body.Position = newPos;
-                        boxCollider.LinearVelocity = new Vector2(-velocity, 0);
+                        boxCollider.LinearVelocity = new Vector2(-Velocity, 0);
                         break;
                     }
                 }
             }
         }
-
+        
         /// <summary>
         ///     Ons the after update
         /// </summary>
         public override void OnAfterUpdate()
         {
-            if (generated && !IsStop)
+            if (_generated && !IsStop)
             {
-                velocity *= factorVelocity;
-                generated = false;
+                Velocity *= factorVelocity;
+                _generated = false;
             }
         }
     }

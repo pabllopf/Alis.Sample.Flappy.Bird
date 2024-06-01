@@ -5,9 +5,9 @@
 //                              ░█─░█ ░█▄▄█ ▄█▄ ░█▄▄▄█
 // 
 //  --------------------------------------------------------------------------
-//  File: CounterController.cs
+//  File:CounterController.cs
 // 
-//  Author: Pablo Perdomo Falcón
+//  Author:Pablo Perdomo Falcón
 //  Web:https://www.pabllopf.dev/
 // 
 //  Copyright (c) 2021 GNU General Public License v3.0
@@ -27,34 +27,34 @@
 // 
 //  --------------------------------------------------------------------------
 
-using System;
+using Alis.Core.Aspect.Logging;
 using Alis.Core.Ecs.Component;
 using Alis.Core.Ecs.Component.Audio;
-using Alis.Core.Ecs.Entity.GameObject;
+using Alis.Core.Ecs.Entity;
 
 namespace Alis.Sample.Flappy.Bird
 {
     /// <summary>
     ///     The counter controller class
     /// </summary>
-    /// <seealso cref="Component" />
-    public class CounterController : Component
+    /// <seealso cref="AComponent" />
+    public class CounterController : AComponent
     {
         /// <summary>
         ///     The audio source
         /// </summary>
         private AudioSource audioSource;
-
+        
         /// <summary>
         ///     The is enter
         /// </summary>
         private bool isEnter;
-
+        
         /// <summary>
         ///     Gets or sets the value of the counter
         /// </summary>
         public int Counter { get; set; }
-
+        
         /// <summary>
         ///     Increments this instance
         /// </summary>
@@ -62,7 +62,7 @@ namespace Alis.Sample.Flappy.Bird
         {
             Counter++;
         }
-
+        
         /// <summary>
         ///     Resets this instance
         /// </summary>
@@ -70,13 +70,13 @@ namespace Alis.Sample.Flappy.Bird
         {
             Counter = 0;
         }
-
+        
         /// <summary>
         ///     Returns the string
         /// </summary>
         /// <returns>The string</returns>
         public override string ToString() => Counter.ToString();
-
+        
         /// <summary>
         ///     Ons the init
         /// </summary>
@@ -84,27 +84,27 @@ namespace Alis.Sample.Flappy.Bird
         {
             audioSource = GameObject.Get<AudioSource>();
         }
-
+        
         /// <summary>
         ///     Ons the collision enter using the specified game object
         /// </summary>
         /// <param name="gameObject">The game object</param>
-        public override void OnCollisionEnter(IGameObject gameObject)
+        public override void OnCollisionEnter(GameObject gameObject)
         {
             if ((gameObject.Tag == "Player") && !isEnter)
             {
                 Increment();
                 audioSource.Play();
-                Console.WriteLine("Value: " + Counter);
+                Logger.Info("Value: " + Counter);
                 isEnter = true;
             }
         }
-
+        
         /// <summary>
         ///     Ons the collision exit using the specified game object
         /// </summary>
         /// <param name="gameObject">The game object</param>
-        public override void OnCollisionExit(IGameObject gameObject)
+        public override void OnCollisionExit(GameObject gameObject)
         {
             if ((gameObject.Tag == "Player") && isEnter)
             {
