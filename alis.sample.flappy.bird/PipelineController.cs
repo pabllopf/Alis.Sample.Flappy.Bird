@@ -102,7 +102,6 @@ namespace Alis.Sample.Flappy.Bird
             boxCollider.LinearVelocity = new Vector2(-Velocity, 0);
             
             
-            
             using (RandomNumberGenerator randomGenerator = RandomNumberGenerator.Create())
             {
                 data = new byte[16];
