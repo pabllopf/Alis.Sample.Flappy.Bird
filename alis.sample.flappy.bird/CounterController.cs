@@ -45,6 +45,7 @@ namespace Alis.Sample.Flappy.Bird
         /// </summary>
         private AudioSource audioSource;
 
+        
         /// <summary>
         ///     The is enter
         /// </summary>
