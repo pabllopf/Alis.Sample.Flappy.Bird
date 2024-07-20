@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.0.6] - 2024-07-20
+### :sparkles: New Features
+- [`b635976`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/b6359766e19df1e93dc04d2a217880859b37e31e) - new version of publish sample *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+### :bug: Bug Fixes
+- [`796a67e`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/796a67e2016e480a3d3b78d6d456088397187f45) - the PUBLISH workflow *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+
 ## [v0.0.5] - 2024-07-07
 ### :bug: Bug Fixes
 - [`fc127fb`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/fc127fbe6b50a7ba954b3609550ec4f1c5acf8d2) - refactor game to the new format builds *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -37,3 +45,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.0.3]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.2...v0.0.3
 [v0.0.4]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.3...v0.0.4
 [v0.0.5]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.4...v0.0.5
+[v0.0.6]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.5...v0.0.6
