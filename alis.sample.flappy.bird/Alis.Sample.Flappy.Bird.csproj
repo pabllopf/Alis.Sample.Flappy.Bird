@@ -15,16 +15,5 @@
 
     <ItemGroup>
         <PackageReference Include="Alis" Version="*" />
-        <PackageReference Include="Alis.Extension.Ads.GoogleAds" Version="*" />
-        <PackageReference Include="Alis.Extension.Cloud.DropBox" Version="*" />
-        <PackageReference Include="Alis.Extension.Cloud.GoogleDrive" Version="*" />
-        <PackageReference Include="Alis.Extension.Graphic.ImGui" Version="*" />
-        <PackageReference Include="Alis.Extension.Graphic.OpenGL" Version="*" />
-        <PackageReference Include="Alis.Extension.Language.Translator" Version="*" />
-        <PackageReference Include="Alis.Extension.Math.HighSpeedPriorityQueue" Version="*" />
-        <PackageReference Include="Alis.Extension.Math.PathGenerator" Version="*" />
-        <PackageReference Include="Alis.Extension.Payment.Stripe" Version="*" />
-        <PackageReference Include="Alis.Extension.Plugin" Version="*" />
-        <PackageReference Include="Alis.Extension.Profile" Version="*" />
     </ItemGroup>
 </Project>
