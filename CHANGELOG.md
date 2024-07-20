@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.0.7] - 2024-07-20
+### :bug: Bug Fixes
+- [`42b96b0`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/42b96b0665251b20d1eeaf6b30dada96f35b8b03) - delete build folder *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+
 ## [v0.0.6] - 2024-07-20
 ### :sparkles: New Features
 - [`b635976`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/b6359766e19df1e93dc04d2a217880859b37e31e) - new version of publish sample *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -46,3 +51,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.0.4]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.3...v0.0.4
 [v0.0.5]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.4...v0.0.5
 [v0.0.6]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.5...v0.0.6
+[v0.0.7]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.6...v0.0.7
