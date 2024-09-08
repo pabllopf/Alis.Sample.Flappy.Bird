@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.0.9] - 2024-09-08
+### :bug: Bug Fixes
+- [`f65c700`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/f65c70094b194b3ab8646e7ed511ef26cd0d4e3c) - game bird *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+
 ## [v0.0.8] - 2024-07-20
 ### :bug: Bug Fixes
 - [`10bea2e`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/10bea2ec18cee05e0e0eca495c7890f672d292af) - delete unless import of nugets to reduce space *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -58,3 +63,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.0.6]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.5...v0.0.6
 [v0.0.7]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.6...v0.0.7
 [v0.0.8]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.7...v0.0.8
+[v0.0.9]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.8...v0.0.9
