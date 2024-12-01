@@ -35,6 +35,7 @@ using Alis.Core.Ecs.Component.Collider;
 using Alis.Core.Ecs.Component.Render;
 using Alis.Core.Ecs.Component.Ui;
 using Alis.Core.Ecs.Entity;
+using Alis.Core.Ecs.System;
 using Alis.Core.Physic.Dynamics;
 
 namespace Alis.Sample.Flappy.Bird
@@ -51,7 +52,7 @@ namespace Alis.Sample.Flappy.Bird
         public static void Main(string[] args)
         {
             VideoGame game = VideoGame
-                .Builder()
+                .Create()
                 .Settings(setting => setting
                     .General(general => general
                         .Name("Flappy Bird 2")
