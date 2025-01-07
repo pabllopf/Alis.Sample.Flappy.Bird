@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.1.3] - 2025-01-07
+### :bug: Bug Fixes
+- [`446d111`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/446d1111baf52d0bd88b5b2c95afe15c60de6ceb) - set default debug mode off *(commit by [@pabllopf](https://github.com/pabllopf))*
+- [`1182547`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/118254719044b1a5a8bbffbb18534ccb592e4edd) - update readme file *(commit by [@pabllopf](https://github.com/pabllopf))*
+- [`a516431`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/a51643184bddd59f7d5bce7ca830ecdf66466d5e) - change vector2 to vector2f *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+
 ## [v0.1.2] - 2024-12-20
 ### :sparkles: New Features
 - [`dd48e56`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/dd48e56562a506aa708f084c1a33d5c580993884) - add new counter with text *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -82,3 +89,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.1.0]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.0.9...v0.1.0
 [v0.1.1]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.0...v0.1.1
 [v0.1.2]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.1...v0.1.2
+[v0.1.3]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.2...v0.1.3
