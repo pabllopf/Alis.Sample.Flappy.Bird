@@ -23,7 +23,6 @@
         <TrimUnusedDependencies>true</TrimUnusedDependencies>
     </PropertyGroup>
 
-
     <PropertyGroup Condition="$(Configuration) == 'Release'">
         <Optimize>true</Optimize>
         <PublishReadyToRun>false</PublishReadyToRun>
