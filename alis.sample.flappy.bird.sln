@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Config", ".Config", "{D4B6
 		code_of_conduct.md = code_of_conduct.md
 		Directory.Build.props = Directory.Build.props
 		funding.yml = funding.yml
-		global.json = global.json
-		licence.md = licence.md
 		readme.md = readme.md
 	EndProjectSection
 EndProject
