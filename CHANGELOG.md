@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.1.9] - 2025-02-02
+### :bug: Bug Fixes
+- [`b67818a`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/b67818a2b0948a3a918d1a6075bc63b9432b06d1) - build trim *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+
 ## [v0.1.8] - 2025-02-02
 ### :bug: Bug Fixes
 - [`0ca4d1a`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/0ca4d1aa2f23c3692fffd7bc8703e325a04a3602) - new version of alis *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -122,3 +127,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.1.6]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.5...v0.1.6
 [v0.1.7]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.6...v0.1.7
 [v0.1.8]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.7...v0.1.8
+[v0.1.9]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.8...v0.1.9
