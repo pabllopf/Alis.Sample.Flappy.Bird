@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.1.6] - 2025-02-02
+### :bug: Bug Fixes
+- [`160c9cd`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/160c9cd548f4b196bd163cae22d9fa5814182533) - space of dlls *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+
 ## [v0.1.5] - 2025-02-01
 ### :bug: Bug Fixes
 - [`5ff75e2`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/5ff75e21a5afafec7884595fd9485a4bb8c2f7f1) - runtime *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -102,3 +107,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.1.3]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.2...v0.1.3
 [v0.1.4]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.3...v0.1.4
 [v0.1.5]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.4...v0.1.5
+[v0.1.6]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.5...v0.1.6
