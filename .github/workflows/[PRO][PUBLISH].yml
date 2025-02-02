@@ -3,6 +3,9 @@ name: "[PRO][PUBLISH]"
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - '.git/**'
+      - '.github/**'
 
 env:
   APP_NAME: "FlappyBird"
