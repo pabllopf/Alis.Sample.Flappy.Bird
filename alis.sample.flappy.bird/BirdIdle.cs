@@ -28,8 +28,8 @@
 //  --------------------------------------------------------------------------
 
 using Alis.Core.Aspect.Math;
+using Alis.Core.Aspect.Math.Vector;
 using Alis.Core.Ecs.Component;
-using Vector2F = Alis.Core.Aspect.Math.Vector.Vector2F;
 
 namespace Alis.Sample.Flappy.Bird
 {

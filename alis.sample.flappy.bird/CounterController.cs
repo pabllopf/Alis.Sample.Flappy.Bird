@@ -33,7 +33,7 @@ using Alis.Core.Aspect.Math.Definition;
 using Alis.Core.Ecs.Component;
 using Alis.Core.Ecs.Component.Audio;
 using Alis.Core.Ecs.Entity;
-using Alis.Core.Graphic.Fonts;
+using Alis.Core.Ecs.System.Manager.Fonts;
 
 namespace Alis.Sample.Flappy.Bird
 {
@@ -100,7 +100,7 @@ namespace Alis.Sample.Flappy.Bird
         /// </summary>
         public override void OnGui()
         {
-            fontManager.RenderText("MONO", $"{Counter}", 128, 15, Color.White, 32);
+            fontManager.RenderText("MONO", $"{Counter}", -0.5f, -7, Color.White, 32);
         }
 
         /// <summary>
