@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.0] - 2025-03-08
+### :sparkles: New Features
+- [`efc0b73`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/efc0b7314ddc757576b215ffd0a8b404d6b4ba48) - implement new config with glfw background *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+
 ## [v0.1.9] - 2025-02-02
 ### :bug: Bug Fixes
 - [`b67818a`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/b67818a2b0948a3a918d1a6075bc63b9432b06d1) - build trim *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -128,3 +133,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.1.7]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.6...v0.1.7
 [v0.1.8]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.7...v0.1.8
 [v0.1.9]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.8...v0.1.9
+[v0.2.0]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.9...v0.2.0
