@@ -65,12 +65,10 @@ namespace Alis.Sample.Flappy.Bird
                         .Build())
                     .Graphic(graphic => graphic
                         .Target("OpenGL")
+                        .Resolution(288, 512)
+                        .BackgroundColor(new Color(141,212,247,255))
                         .FrameRate(30)
-                        .Window(window => window
-                            .Resolution(288, 512)
-                            .Background(Color.Black)
-                            .IsResizable(false)
-                            .Build())
+                        .IsResizable(false)
                         .Build())
                     .Physic(physic => physic
                         .Debug(false)
@@ -80,7 +78,6 @@ namespace Alis.Sample.Flappy.Bird
                     .Build())
                 .World(sceneManager => sceneManager
 
-                        
                     ////////////////////////////////////////
                     // MAIN MENU SCENE:
                     ////////////////////////////////////////
@@ -188,6 +185,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .AddAnimation(animation => animation
                                     .Name("Fly")
                                     .Speed(0.2f)
+                                    .Order(0)
                                     .AddFrame(frame1 => frame1
                                         .FilePath("bluebird-down_flap.bmp")
                                         .Build())
@@ -454,7 +452,7 @@ namespace Alis.Sample.Flappy.Bird
                             .AddComponent<Sprite>(sprite => sprite
                                 .Builder()
                                 .SetTexture("bluebird-down_flap.bmp")
-                                .Depth(4)
+                                .Depth(0)
                                 .Build())
                             .AddComponent<AudioSource>(audioSource => audioSource
                                 .Builder()
@@ -468,6 +466,7 @@ namespace Alis.Sample.Flappy.Bird
                                 .AddAnimation(animation => animation
                                     .Name("Fly")
                                     .Speed(0.2f)
+                                    .Order(0)
                                     .AddFrame(frame1 => frame1
                                         .FilePath("bluebird-down_flap.bmp")
                                         .Build())
