@@ -1,4 +1,4 @@
-[![](https://raw.githubusercontent.com/pabllopf/Alis/master/docs/banner/Alis_Banner_970x250.png)](https://pabllopf.github.io/Alis/index.html)
+[![](https://raw.githubusercontent.com/pabllopf/Alis/master/docs/banner/Alis_Banner_970x250.bmp)](https://pabllopf.github.io/Alis/index.html)
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pabllopf_Alis&metric=coverage)](https://sonarcloud.io/summary/new_code?id=pabllopf_Alis)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=pabllopf_Alis&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=pabllopf_Alis)
@@ -149,7 +149,7 @@ The following table contains all the available packages, their purpose, and thei
 
 The ALIS framework is released under the [GNU General Public License v3 (GPL-3.0)](https://github.com/pabllopf/Alis/blob/master/license.md), a strong copyleft license that ensures your freedom to use, modify, and distribute the framework while preserving the same license terms. Below is an explanation of how the license affects you as a developer:
 
-[![License](https://raw.githubusercontent.com/pabllopf/Alis/master/docs/licence/License.png)](https://github.com/pabllopf/Alis/blob/master/license.md)
+[![License](https://raw.githubusercontent.com/pabllopf/Alis/master/docs/licence/License.bmp)](https://github.com/pabllopf/Alis/blob/master/license.md)
 
 ### Key License Points
 
