@@ -72,10 +72,7 @@ jobs:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
       - name: Zip output
-        run: |
-          cd build_output
-          zip -r ../${{ env.APP_NAME }}_${{ matrix.rid_prefix }}_${{ matrix.arch }}.zip .
-          cd ..
+        run: zip -r ./build_output/${{ env.APP_NAME }}_${{ matrix.rid_prefix }}_${{ matrix.arch }}.zip ./build_output/${{ matrix.rid_prefix }}_${{ matrix.arch }}/
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
