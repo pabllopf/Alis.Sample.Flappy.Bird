@@ -7,14 +7,6 @@
     
     <PropertyGroup>
         <ApplicationIcon>Config/app.ico</ApplicationIcon>
-
-        <Optimize>true</Optimize>
-        <PublishSingleFile>true</PublishSingleFile>
-        <SelfContained>true</SelfContained>
-        <TrimUnusedDependencies>true</TrimUnusedDependencies>
-        <PublishTrimmed>true</PublishTrimmed>
-        <TrimMode>partial</TrimMode>
-        <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
     </PropertyGroup>
     
     <ItemGroup>
