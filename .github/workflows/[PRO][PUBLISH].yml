@@ -83,7 +83,7 @@ jobs:
 
       - name: Zip output (Linux/macOS)
         if: runner.os == 'Linux' || runner.os == 'macOS'
-        run: zip -r ./build_output/${{ env.APP_NAME }}_${{ matrix.rid }}.zip ./build_output/${{ matrix.rid }}/
+        run: zip -r ./build_output/${{ env.APP_NAME }}_${{ matrix.rid }}.zip ./build_output/${{ matrix.rid }}_${{ matrix.arch }}/
 
       - name: Zip output (Windows)
         if: runner.os == 'Windows'
@@ -95,8 +95,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.APP_NAME }}_${{ matrix.rid }}_${{ matrix.arch }}
-          path: ./**/${{ env.APP_NAME }}_${{ matrix.rid }}_${{ matrix.arch }}.zip
+          name: ${{ env.APP_NAME }}_${{ matrix.rid }}
+          path: ./**/${{ env.APP_NAME }}_${{ matrix.rid }}.zip
   
   
   
