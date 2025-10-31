@@ -45,9 +45,11 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        os: [ macos-15, windows-latest ]
+        os: [ ubuntu-latest, macos-15, windows-latest ]
         arch: [ x64, arm64 ]
         include:
+          - os: ubuntu-latest
+            rid_prefix: linux
           - os: macos-15
             rid_prefix: osx
           - os: windows-latest
