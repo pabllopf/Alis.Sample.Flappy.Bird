@@ -67,7 +67,7 @@ jobs:
 
       - name: Publish NativeAOT binary
         run: |
-          dotnet publish -r ${{ matrix.rid_prefix }}-${{ matrix.arch }} -c Release -f net8.0 -o ./build_output -p:AssemblyVersion=$VERSION
+          dotnet publish -r ${{ matrix.rid_prefix }}-${{ matrix.arch }} -c Release -f net8.0 -o ./build_output/${{ matrix.rid_prefix }}_${{ matrix.arch }}/ -p:AssemblyVersion=$VERSION
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
