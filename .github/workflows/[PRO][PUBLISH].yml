@@ -71,8 +71,9 @@ jobs:
       - name: Install ARM64 cross toolchain
         if: runner.os == 'Linux'
         run: |
+          sudo dpkg --add-architecture arm64
           sudo apt-get update
-          sudo apt-get install -y clang gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
+          sudo apt-get install -y clang gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu libz-dev:arm64 libtinfo5:arm64 libc6-dev:arm64
 
       - name: Publish NativeAOT binary
         run: |
