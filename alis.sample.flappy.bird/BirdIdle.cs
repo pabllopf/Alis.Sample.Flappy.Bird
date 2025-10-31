@@ -41,7 +41,6 @@ namespace Alis.Sample.Flappy.Bird
     /// <summary>
     ///     The bird idle class
     /// </summary>
-    
     public class BirdIdle : IOnStart, IOnUpdate, IHasContext<Context>
     {
         /// <summary>
