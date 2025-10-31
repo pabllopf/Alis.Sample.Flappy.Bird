@@ -40,7 +40,6 @@ jobs:
           
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
-    
   build:
     needs: prepare
     strategy:
