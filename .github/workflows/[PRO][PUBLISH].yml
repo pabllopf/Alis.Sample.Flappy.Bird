@@ -30,15 +30,15 @@ jobs:
           FILE="./Directory.Build.props"
           VERSION=$(grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' $FILE)
           echo "Current version: $VERSION"
-
+          
           IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
           PATCH=$((PATCH + 1))
           NEW_VERSION="$MAJOR.$MINOR.$PATCH"
           echo "New version: $NEW_VERSION"
-
+          
           # Update version file
           sed -i "s/$VERSION/$NEW_VERSION/" $FILE
-
+          
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
     
@@ -46,8 +46,8 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-15, windows-latest]
-        arch: [x64, arm64]
+        os: [ ubuntu-latest, macos-15, windows-latest ]
+        arch: [ x64, arm64 ]
         include:
           - os: ubuntu-latest
             rid_prefix: linux
@@ -57,6 +57,9 @@ jobs:
             rid_prefix: win
     runs-on: ${{ matrix.os }}
     name: Build ${{ matrix.rid_prefix }}-${{ matrix.arch }}
+    env:
+      VERSION: ${{ needs.prepare.outputs.version }}
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
     steps:
       - uses: actions/checkout@v5
 
@@ -64,27 +67,10 @@ jobs:
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.0.x
-          
-      - name: Get version and increment
-        id: version
-        run: |
-          FILE="./Directory.Build.props"
-          VERSION=$(grep -Eo '[0-9]+\.[0-9]+\.[0-9]+' $FILE)
-          echo "Current version: $VERSION"
-
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
-          PATCH=$((PATCH + 1))
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
-          echo "New version: $NEW_VERSION"
-
-          # Update version file
-          sed -i "s/$VERSION/$NEW_VERSION/" $FILE
-
-          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Publish NativeAOT binary
         run: |
-          dotnet publish -r ${{ matrix.rid_prefix }}-${{ matrix.arch }} -c Release -f net8.0 -o ./build_output
+          dotnet publish -r ${{ matrix.rid_prefix }}-${{ matrix.arch }} -c Release -f net8.0 -o ./build_output -p:AssemblyVersion=$VERSION
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
