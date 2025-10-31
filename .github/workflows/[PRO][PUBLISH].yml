@@ -46,17 +46,24 @@ jobs:
     needs: prepare
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-15, windows-latest ]
-        arch: [ x64, arm64 ]
         include:
-          - os: ubuntu-latest
-            rid_prefix: linux
+          - os: ubuntu-24.04
+            arch: x64
+            rid: linux-x64
+          - os: ubuntu-24.04-arm
+            arch: arm64
+            rid: linux-arm64
           - os: macos-15
-            rid_prefix: osx
+            arch: x64
+            rid: osx-x64
+          - os: macos-15
+            arch: arm64
+            rid: osx-arm64
           - os: windows-latest
-            rid_prefix: win
+            arch: x64
+            rid: win-x64
     runs-on: ${{ matrix.os }}
-    name: Build ${{ matrix.rid_prefix }}-${{ matrix.arch }}
+    name: Build ${{ matrix.rid }}-${{ matrix.arch }}
     env:
       VERSION: ${{ needs.prepare.outputs.version }}
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
@@ -67,37 +74,32 @@ jobs:
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.0.x
-          
-      - name: Install ARM64 cross toolchain
-        if: runner.os == 'Linux'
-        run: |
-          sudo dpkg --add-architecture arm64
-          sudo apt-get update
-          sudo apt-get install -y clang gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu libz-dev:arm64 libtinfo5:arm64 libc6-dev:arm64
 
       - name: Publish NativeAOT binary
         run: |
-          dotnet publish -r ${{ matrix.rid_prefix }}-${{ matrix.arch }} -c Release -f net8.0 -o ./build_output/${{ matrix.rid_prefix }}_${{ matrix.arch }}/ -p:AssemblyVersion=$VERSION
+          dotnet publish -r ${{ matrix.rid }} -c Release -f net8.0 -o ./build_output/${{ matrix.rid }}_${{ matrix.arch }}/ -p:AssemblyVersion=$VERSION -p:PublishAot=true
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
-      - name: Zip output (Other)
-        if: runner.os != 'Windows'
-        run: zip -r ./build_output/${{ env.APP_NAME }}_${{ matrix.rid_prefix }}_${{ matrix.arch }}.zip ./build_output/${{ matrix.rid_prefix }}_${{ matrix.arch }}/
+      - name: Zip output (Linux/macOS)
+        if: runner.os == 'Linux' || runner.os == 'macOS'
+        run: zip -r ./build_output/${{ env.APP_NAME }}_${{ matrix.rid }}_${{ matrix.arch }}.zip ./build_output/${{ matrix.rid }}_${{ matrix.arch }}/
 
       - name: Zip output (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          Compress-Archive -Path "build_output/${{ matrix.rid_prefix }}_${{ matrix.arch }}/*" `
-                           -DestinationPath "build_output/${{ env.APP_NAME }}_${{ matrix.rid_prefix }}_${{ matrix.arch }}.zip"
+          Compress-Archive -Path "build_output/${{ matrix.rid }}_${{ matrix.arch }}/*" `
+                           -DestinationPath "build_output/${{ env.APP_NAME }}_${{ matrix.rid }}_${{ matrix.arch }}.zip"
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.APP_NAME }}_${{ matrix.rid_prefix }}_${{ matrix.arch }}
-          path: ./**/${{ env.APP_NAME }}_${{ matrix.rid_prefix }}_${{ matrix.arch }}.zip
-
-
+          name: ${{ env.APP_NAME }}_${{ matrix.rid }}_${{ matrix.arch }}
+          path: ./**/${{ env.APP_NAME }}_${{ matrix.rid }}_${{ matrix.arch }}.zip
+  
+  
+  
   publish:
     needs: [prepare, build]
     runs-on: ubuntu-latest
