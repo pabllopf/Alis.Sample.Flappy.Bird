@@ -67,6 +67,12 @@ jobs:
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 8.0.x
+          
+      - name: Install ARM64 cross toolchain
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
 
       - name: Publish NativeAOT binary
         run: |
