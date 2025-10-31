@@ -71,9 +71,16 @@ jobs:
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
-      - name: Zip output
+      - name: Zip output (Other)
+        if: runner.os != 'Windows'
         run: zip -r ./build_output/${{ env.APP_NAME }}_${{ matrix.rid_prefix }}_${{ matrix.arch }}.zip ./build_output/${{ matrix.rid_prefix }}_${{ matrix.arch }}/
 
+      - name: Zip output (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Compress-Archive -Path "build_output/${{ matrix.rid_prefix }}_${{ matrix.arch }}/*" `
+                           -DestinationPath "build_output/${{ env.APP_NAME }}_${{ matrix.rid_prefix }}_${{ matrix.arch }}.zip"
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
