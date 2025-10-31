@@ -69,6 +69,7 @@
             Overwrite="true" />
     </Target>
 
+    
     <PropertyGroup>
         <!-- app.manifest file to use when building the project -->
         <ApplicationManifest>$(ProjectDir)Config/app.manifest</ApplicationManifest>
