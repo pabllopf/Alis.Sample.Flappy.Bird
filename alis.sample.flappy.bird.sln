@@ -3,17 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Config", ".Config", "{D4B64FBA-B22F-497E-84B0-9D4FFCD107E5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".config", ".config", "{D4B64FBA-B22F-497E-84B0-9D4FFCD107E5}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
-		code_of_conduct.md = code_of_conduct.md
-		Directory.Build.props = Directory.Build.props
-		funding.yml = funding.yml
-		readme.md = readme.md
+		.gitattributes = .gitattributes
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alis.Sample.Flappy.Bird", "alis.sample.flappy.bird\Alis.Sample.Flappy.Bird.csproj", "{0903D66D-7922-4EC6-B7EB-D3ABB8820B33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{22C678CD-7DE8-4628-AB04-CECE42F0D5E5}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		code_of_conduct.md = code_of_conduct.md
+		Directory.Build.props = Directory.Build.props
+		funding.yml = funding.yml
+		license.md = license.md
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{4CC1E2A7-D149-46E3-9144-689343B8864D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{DF8C0ACB-0DAD-4422-B216-8568A2EE83A7}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\[PRO][CHECK][ISSUES].yml = .github\workflows\[PRO][CHECK][ISSUES].yml
+		.github\workflows\[PRO][DEPENDENCY][REVIEW].yml = .github\workflows\[PRO][DEPENDENCY][REVIEW].yml
+		.github\workflows\[PRO][PUBLISH].yml = .github\workflows\[PRO][PUBLISH].yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +58,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{DF8C0ACB-0DAD-4422-B216-8568A2EE83A7} = {4CC1E2A7-D149-46E3-9144-689343B8864D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C491FC8-E9B0-4689-BAA5-ED6F7C5F61A5}

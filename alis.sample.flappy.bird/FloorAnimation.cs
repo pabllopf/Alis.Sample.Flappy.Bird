@@ -27,17 +27,21 @@
 // 
 //  --------------------------------------------------------------------------
 
-using Alis.Core.Aspect.Math;
+using Alis.Core.Aspect.Fluent.Components;
+using Alis.Core.Aspect.Fluent.Words;
 using Alis.Core.Aspect.Math.Vector;
-using Alis.Core.Ecs.Component;
+using Alis.Core.Ecs;
+using Alis.Core.Ecs.Components;
+using Alis.Core.Ecs.Systems.Manager.Time;
+using Alis.Core.Ecs.Systems.Scope;
 
 namespace Alis.Sample.Flappy.Bird
 {
     /// <summary>
     ///     The floor animation class
     /// </summary>
-    /// <seealso cref="AComponent" />
-    public class FloorAnimation : AComponent
+    
+    public class FloorAnimation : IOnStart, IOnUpdate, IHasContext<Context>
     {
         /// <summary>
         ///     The velocity
@@ -50,38 +54,41 @@ namespace Alis.Sample.Flappy.Bird
         private float xOld;
 
         /// <summary>
-        ///     Ons the init
+        /// Ons the start using the specified self
         /// </summary>
-        public override void OnInit()
+        /// <param name="self">The self</param>
+        public void OnStart(IGameObject self)
         {
-            xOld = GameObject.Transform.Position.X;
+            xOld = self.Get<Transform>().Position.X;    
         }
+        
 
         /// <summary>
-        ///     Ons the update
+        /// Ons the update using the specified self
         /// </summary>
-        public override void OnUpdate()
+        /// <param name="self">The self</param>
+        public void OnUpdate(IGameObject self)
         {
+            ref Transform t = ref self.Get<Transform>();
+            
             // get the x position of game object:
-            float x = GameObject.Transform.Position.X;
+            float x = t.Position.X;
 
             // get the y position of game object:
-            float y = GameObject.Transform.Position.Y;
+            float y = t.Position.Y;
 
             // get the velocity of game object:
             float displace = Velocity * Context.TimeManager.DeltaTime;
 
             // if the x position is less than -50.0f, then reset the x position to 0.0f
             Vector2F newPosition = x < -1.0f ? new Vector2F(xOld, y) : new Vector2F(x - displace, y);
-
-            Transform transform = new Transform
-            {
-                Position = newPosition,
-                Rotation = GameObject.Transform.Rotation,
-                Scale = GameObject.Transform.Scale
-            };
-
-            GameObject.Transform = transform;
+            
+            t.Position = newPosition;
         }
+
+        /// <summary>
+        /// Gets or sets the value of the context
+        /// </summary>
+        public Context Context { get; set; }
     }
 }

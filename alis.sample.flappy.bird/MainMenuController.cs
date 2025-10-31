@@ -27,27 +27,49 @@
 // 
 //  --------------------------------------------------------------------------
 
-using Alis.Core.Aspect.Data.Mapping;
-using Alis.Core.Ecs.Component;
+using System;
+using Alis.Core.Aspect.Fluent;
+using Alis.Core.Aspect.Fluent.Components;
+using Alis.Core.Aspect.Fluent.Words;
+using Alis.Core.Aspect.Logging;
+using Alis.Core.Ecs.Components.Render;
+using Alis.Core.Ecs.Systems;
+using Alis.Core.Ecs.Systems.Manager.Scene;
+using Alis.Core.Ecs.Systems.Scope;
 
 namespace Alis.Sample.Flappy.Bird
 {
     /// <summary>
     ///     The main menu controller class
     /// </summary>
-    /// <seealso cref="AComponent" />
-    public class MainMenuController : AComponent
+    
+    public class MainMenuController : IOnUpdate, IOnPressKey, IHasContext<Context>
     {
+
         /// <summary>
-        ///     Ons the press key using the specified key
+        /// Ons the update using the specified self
         /// </summary>
-        /// <param name="key">The key</param>
-        public override void OnPressKey(Keys key)
+        /// <param name="self">The self</param>
+        public void OnUpdate(IGameObject self)
         {
-            if (key == Keys.Space)
+        }
+
+        /// <summary>
+        /// Ons the press key using the specified info
+        /// </summary>
+        /// <param name="info">The info</param>
+        public void OnPressKey(KeyEventInfo info)
+        {
+            if (info.Key == ConsoleKey.Spacebar)
             {
-                Context.SceneManager.LoadScene("Game_Scene");
+                Logger.Info("Changing to game scene 'Game_Scene'...");
+                Context.SceneManager.LoadScene(1);
             }
         }
+
+        /// <summary>
+        /// Gets or sets the value of the context
+        /// </summary>
+        public Context Context { get; set; }
     }
 }

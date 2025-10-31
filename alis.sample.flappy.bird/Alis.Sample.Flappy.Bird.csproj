@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <ApplicationIcon>Config/app.ico</ApplicationIcon>
 
         <Optimize>true</Optimize>
         <PublishSingleFile>true</PublishSingleFile>
@@ -12,17 +16,57 @@
         <TrimMode>partial</TrimMode>
         <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
     </PropertyGroup>
-
-    <ItemGroup>
-        <None Condition="Exists('$(ProjectDir)/Assets/') == True"
-              Update="$(ProjectDir)/Assets/**"
-              LinkBase="Assets/"
-              CopyToOutputDirectory="Always"
-              CopyToPublishDirectory="Always"/>
-    </ItemGroup>
-
+    
     <ItemGroup>
         <PackageReference Include="Alis" Version="*" />
     </ItemGroup>
 
+
+    <!-- Target to create the .app bundle on macOS after publish -->
+    <Target Name="CreateMacAppBundle" AfterTargets="Publish" Condition=" '$(RuntimeIdentifier)' == 'osx-x64' OR '$(RuntimeIdentifier)' == 'osx-arm64' ">
+        <PropertyGroup>
+            <!-- App name and paths -->
+            <AppName>$(AssemblyName)</AppName>
+            <AppBundleDir>$(PublishDir)$(AppName).app/Contents</AppBundleDir>
+            <AppMacOSDir>$(AppBundleDir)/MacOS</AppMacOSDir>
+            <AppResourcesDir>$(AppBundleDir)/Resources</AppResourcesDir>
+            <AppPlistSource>$(ProjectDir)obj/Info.plist</AppPlistSource>
+            <AppPlist>$(AppBundleDir)/Info.plist</AppPlist>
+            <AppIconIco>$(ProjectDir)Config/app.ico</AppIconIco>
+            <AppIconIcns>$(AppResourcesDir)/app.icns</AppIconIcns>
+        </PropertyGroup>
+
+        <!-- Create folder structure -->
+        <MakeDir Directories="$(AppMacOSDir);$(AppResourcesDir)" />
+
+        <!-- Copy the executable -->
+        <Copy SourceFiles="$(PublishDir)$(AppName)" DestinationFolder="$(AppMacOSDir)" />
+
+        <!-- Copy content files (adjust pattern if you have more content) -->
+        <Copy SourceFiles="@(Content)" DestinationFolder="$(AppResourcesDir)" SkipUnchangedFiles="true" Condition="@(Content->Count()) &gt; 0" />
+
+        <!-- Convert icon to .icns if necessary -->
+        <Exec Command="sips -s format icns $(AppIconIco) --out $(AppIconIcns)" Condition="Exists('$(AppIconIco)')" />
+
+        <!-- Copy Info.plist generated in Config -->
+        <Copy SourceFiles="$(AppPlistSource)" DestinationFiles="$(AppPlist)" />
+
+        <!-- Set executable permissions for the binary -->
+        <Exec Command="chmod +x $(AppMacOSDir)/$(AppName)" />
+    </Target>
+
+    <Target Name="GenerateDynamicInfoPlist" BeforeTargets="Publish">
+        <PropertyGroup>
+            <DynamicPlistTemplate>$(ProjectDir)Config/Info.plist</DynamicPlistTemplate>
+            <DynamicPlistOutput>$(ProjectDir)obj/Info.plist</DynamicPlistOutput>
+        </PropertyGroup>
+        <ReadLinesFromFile File="$(DynamicPlistTemplate)">
+            <Output TaskParameter="Lines" ItemName="PlistLines" />
+        </ReadLinesFromFile>
+        <WriteLinesToFile
+            File="$(DynamicPlistOutput)"
+            Lines="@(PlistLines->Replace('Alis.Sample.Flappy.Bird', '$(AssemblyName)')->Replace('1.0', '$(Version)')->Replace('com.alis.flappybird', '$(ApplicationId)'))"
+            Overwrite="true" />
+    </Target>
+    
 </Project>

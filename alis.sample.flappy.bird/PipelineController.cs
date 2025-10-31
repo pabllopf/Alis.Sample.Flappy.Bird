@@ -28,20 +28,18 @@
 //  --------------------------------------------------------------------------
 
 using System;
-using System.Security.Cryptography;
+using Alis.Core.Aspect.Fluent.Components;
 using Alis.Core.Aspect.Logging;
-using Alis.Core.Aspect.Math;
 using Alis.Core.Aspect.Math.Vector;
-using Alis.Core.Ecs.Component;
-using Alis.Core.Ecs.Component.Collider;
+using Alis.Core.Ecs.Components;
+using Alis.Core.Ecs.Components.Collider;
 
 namespace Alis.Sample.Flappy.Bird
 {
     /// <summary>
     ///     The pipeline controller class
     /// </summary>
-    /// <seealso cref="AComponent" />
-    public class PipelineController : AComponent
+    internal class PipelineController() : IOnStart, IOnUpdate, IOnExit
     {
         /// <summary>
         ///     The random height
@@ -67,17 +65,7 @@ namespace Alis.Sample.Flappy.Bird
         ///     The box collider
         /// </summary>
         private BoxCollider boxCollider;
-
-        /// <summary>
-        ///     The data
-        /// </summary>
-        private byte[] data;
-
-        /// <summary>
-        ///     The factor velocity
-        /// </summary>
-        private float factorVelocity = 0.5f;
-
+        
         /// <summary>
         ///     The pos origin
         /// </summary>
@@ -89,53 +77,55 @@ namespace Alis.Sample.Flappy.Bird
         public float Velocity = 3;
 
         /// <summary>
-        ///     Ons the init
+        /// The info
         /// </summary>
-        public override void OnInit()
+        private Info info;
+
+
+        /// <summary>
+        /// Ons the start using the specified self
+        /// </summary>
+        /// <param name="self">The self</param>
+        public void OnStart(IGameObject self)
         {
-            posOrigin = GameObject.Transform;
-            boxCollider = GameObject.Get<BoxCollider>();
-
+            posOrigin = self.Get<Transform>();
+            info = self.Get<Info>();
+            boxCollider = self.Get<BoxCollider>();
+            
             Velocity = 3;
-            factorVelocity = 1.1f;
-
-            boxCollider.LinearVelocity = new Vector2F(-Velocity, 0);
-
-            using (RandomNumberGenerator randomGenerator = RandomNumberGenerator.Create())
-            {
-                data = new byte[16];
-                randomGenerator.GetBytes(data);
-            }
-
-            _randomHeight = RandomNumberGenerator.GetInt32(0, 3);
-            _randomDirection = Math.Abs(BitConverter.ToInt32(data, 4) % 2);
-            Logger.Info($"{GameObject.Name} NUM={_randomHeight} Direction={_randomDirection}");
+            boxCollider.Body.LinearVelocity = new Vector2F(-Velocity, 0);
+            
+            _randomHeight = (int)(DateTime.Now.Ticks % 4);
+            _randomDirection = Math.Abs((int)(DateTime.Now.Ticks % 4) % 2);
+            Logger.Info($"{info.Name} NUM={_randomHeight} Direction={_randomDirection}");
 
             _generated = true;
             IsStop = false;
         }
 
         /// <summary>
-        ///     Ons the update
+        /// Ons the update using the specified self
         /// </summary>
-        public override void OnUpdate()
+        /// <param name="self">The self</param>
+        public void OnUpdate(IGameObject self)
         {
+            Transform current = self.Get<Transform>();
+            
             if (IsStop && (Velocity != 0))
             {
                 Velocity = 0;
-                factorVelocity = 0;
-                boxCollider.LinearVelocity = new Vector2F(0, 0);
+                boxCollider.Body.LinearVelocity = new Vector2F(0, 0);
                 return;
             }
 
-            if ((GameObject.Transform.Position.X <= -5) && !IsStop)
+            if ((current.Position.X <= -5) && !IsStop)
             {
                 if (!_generated)
                 {
                     _generated = true;
-                    _randomHeight = RandomNumberGenerator.GetInt32(0, 3);
-                    _randomDirection = Math.Abs(BitConverter.ToInt32(data, 4) % 2);
-                    Logger.Info($"{GameObject.Name} NUM={_randomHeight} Direction={_randomDirection} velocity={Velocity}");
+                    _randomHeight = (int)(DateTime.Now.Ticks % 2);
+                    _randomDirection = Math.Abs((int)(DateTime.Now.Ticks % 4) % 2);
+                    Logger.Info($"{info.Name} NUM={_randomHeight} Direction={_randomDirection} velocity={Velocity}");
                 }
 
                 switch (_randomDirection)
@@ -144,30 +134,35 @@ namespace Alis.Sample.Flappy.Bird
                     {
                         Vector2F newPos = new Vector2F(posOrigin.Position.X, posOrigin.Position.Y + _randomHeight);
                         boxCollider.Body.Position = newPos;
-                        boxCollider.LinearVelocity = new Vector2F(-Velocity, 0);
+                        boxCollider.Body.LinearVelocity = new Vector2F(-Velocity, 0);
                         break;
                     }
                     case 1:
                     {
                         Vector2F newPos = new Vector2F(posOrigin.Position.X, posOrigin.Position.Y - _randomHeight);
                         boxCollider.Body.Position = newPos;
-                        boxCollider.LinearVelocity = new Vector2F(-Velocity, 0);
+                        boxCollider.Body.LinearVelocity = new Vector2F(-Velocity, 0);
                         break;
                     }
                 }
             }
+            
+            if (_generated && !IsStop)
+            {
+                _generated = false;
+            }
         }
 
         /// <summary>
-        ///     Ons the after update
+        /// Ons the exit using the specified self
         /// </summary>
-        public override void OnAfterUpdate()
+        /// <param name="self">The self</param>
+        public void OnExit(IGameObject self)
         {
-            if (_generated && !IsStop)
-            {
-                Velocity *= factorVelocity;
-                _generated = false;
-            }
+            Velocity = 0;
+            IsStop = true;
+            _generated = false;
+            Logger.Info($"{info.Name} Exiting...");
         }
     }
 }

@@ -27,17 +27,22 @@
 // 
 //  --------------------------------------------------------------------------
 
+using Alis.Core.Aspect.Fluent.Components;
+using Alis.Core.Aspect.Fluent.Words;
 using Alis.Core.Aspect.Math;
 using Alis.Core.Aspect.Math.Vector;
-using Alis.Core.Ecs.Component;
+using Alis.Core.Ecs;
+using Alis.Core.Ecs.Components;
+using Alis.Core.Ecs.Systems.Scope;
+using Alis.Core.Physic.Dynamics;
 
 namespace Alis.Sample.Flappy.Bird
 {
     /// <summary>
     ///     The bird idle class
     /// </summary>
-    /// <seealso cref="AComponent" />
-    public class BirdIdle : AComponent
+    
+    public class BirdIdle : IOnStart, IOnUpdate, IHasContext<Context>
     {
         /// <summary>
         ///     The range movement
@@ -63,29 +68,34 @@ namespace Alis.Sample.Flappy.Bird
         ///     The go up
         /// </summary>
         private bool goUp = true;
-
+        
         /// <summary>
-        ///     Ons the init
+        /// Ons the start using the specified self
         /// </summary>
-        public override void OnInit()
+        /// <param name="self">The self</param>
+        public void OnStart(IGameObject self)
         {
-            defaultPosition = GameObject.Transform.Position;
+            defaultPosition = self.Get<Transform>().Position;
         }
 
         /// <summary>
-        ///     Ons the update
+        /// Ons the update using the specified self
         /// </summary>
-        public override void OnUpdate()
+        /// <param name="self">The self</param>
+        public void OnUpdate(IGameObject self)
         {
+            ref Transform t = ref self.Get<Transform>();
+            
             // get the x position of game object:
-            float x = GameObject.Transform.Position.X;
+            float x = t.Position.X;
 
             // get the y position of game object:
-            float y = GameObject.Transform.Position.Y;
+            float y = t.Position.Y;
 
-            Vector2F scale = GameObject.Transform.Scale;
+            Vector2F scale = t.Scale;
 
-            float rotation = GameObject.Transform.Rotation;
+
+            float rotation = t.Rotation;
 
             // create a new position:
             Vector2F newPosition;
@@ -101,7 +111,7 @@ namespace Alis.Sample.Flappy.Bird
                     Scale = scale
                 };
 
-                GameObject.Transform = transform;
+                self.Get<Transform>() = transform;
             }
             else if (goDown && !goUp)
             {
@@ -114,7 +124,7 @@ namespace Alis.Sample.Flappy.Bird
                     Scale = scale
                 };
 
-                GameObject.Transform = transform;
+                self.Get<Transform>() = transform;
             }
 
             if (y < defaultPosition.Y - RangeMovement)
@@ -129,5 +139,10 @@ namespace Alis.Sample.Flappy.Bird
                 goDown = false;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the value of the context
+        /// </summary>
+        public Context Context { get; set; }
     }
 }

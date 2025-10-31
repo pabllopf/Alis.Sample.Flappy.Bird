@@ -27,20 +27,23 @@
 // 
 //  --------------------------------------------------------------------------
 
-using Alis.Core.Aspect.Data.Mapping;
+using System;
+using Alis.Core.Aspect.Fluent;
+using Alis.Core.Aspect.Fluent.Components;
 using Alis.Core.Aspect.Logging;
 using Alis.Core.Aspect.Math.Vector;
-using Alis.Core.Ecs.Component;
-using Alis.Core.Ecs.Component.Audio;
-using Alis.Core.Ecs.Component.Collider;
+using Alis.Core.Ecs;
+using Alis.Core.Ecs.Components.Audio;
+using Alis.Core.Ecs.Components.Collider;
+using Alis.Core.Ecs.Components.Render;
 
 namespace Alis.Sample.Flappy.Bird
 {
     /// <summary>
     ///     The bird controller class
     /// </summary>
-    /// <seealso cref="AComponent" />
-    public class BirdController : AComponent
+    
+    public class BirdController : IOnStart, IOnUpdate, IOnPressKey
     {
         /// <summary>
         ///     The audio source
@@ -56,27 +59,40 @@ namespace Alis.Sample.Flappy.Bird
         ///     Gets or sets the value of the is dead
         /// </summary>
         public bool IsDead { get; set; } = false;
-
+        
         /// <summary>
-        ///     Ons the init
+        /// Ons the start using the specified self
         /// </summary>
-        public override void OnInit()
+        /// <param name="self">The self</param>
+        public void OnStart(IGameObject self)
         {
-            audioSource = GameObject.Get<AudioSource>();
-            boxCollider = GameObject.Get<BoxCollider>();
+            audioSource = self.Get<AudioSource>();
+            boxCollider = self.Get<BoxCollider>();
+            boxCollider.Body.Position = new Vector2F(-3, 0);
         }
 
         /// <summary>
-        ///     Ons the press key using the specified key
+        /// Ons the update using the specified self
         /// </summary>
-        /// <param name="key">The key</param>
-        public override void OnPressKey(Keys key)
+        /// <param name="self">The self</param>
+        public void OnUpdate(IGameObject self)
         {
-            if (key == Keys.Space)
+            
+        }
+
+        /// <summary>
+        /// Ons the press key using the specified info
+        /// </summary>
+        /// <param name="info">The info</param>
+        public void OnPressKey(KeyEventInfo info)
+        {
+            if (info.Key == ConsoleKey.Spacebar)
             {
                 boxCollider.Body.ApplyLinearImpulse(new Vector2F(0, 7));
                 Logger.Info("Go up!");
             }
         }
+
+       
     }
 }
