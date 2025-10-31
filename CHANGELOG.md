@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.1] - 2025-10-31
+### :sparkles: New Features
+- [`bc50bc4`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/bc50bc46f6b20eed6a61093d928c7d3566030408) - add new assets optimiced *(commit by [@pabllopf](https://github.com/pabllopf))*
+- [`4607b97`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/4607b9705de8fcae4512d5ad4275c04cb092915c) - add if: contains(github.event.head_commit.message, 'release:') *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+### :bug: Bug Fixes
+- [`d765cc2`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/d765cc2e4389eb70c69a79dadce4eb427cc5c77f) - new packs with custom alis *(commit by [@pabllopf](https://github.com/pabllopf))*
+
+### :construction_worker: Build System
+- [`4102d27`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/4102d27e8490f59f40ed024a5691a6f71b8111e7) - **deps**: bump actions/checkout from 4 to 5 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`62b9705`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/62b97052506b0db9020e8e97e138d0e99adfdcee) - **deps**: bump actions/setup-dotnet from 3 to 5 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`29219b9`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/29219b92bb45d5c540cd43ab17f3dd30c04fb782) - **deps**: bump actions/stale from 8 to 10 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+
 ## [v0.2.0] - 2025-03-08
 ### :sparkles: New Features
 - [`efc0b73`](https://github.com/pabllopf/Alis.Sample.Flappy.Bird/commit/efc0b7314ddc757576b215ffd0a8b404d6b4ba48) - implement new config with glfw background *(commit by [@pabllopf](https://github.com/pabllopf))*
@@ -134,3 +148,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.1.8]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.7...v0.1.8
 [v0.1.9]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.8...v0.1.9
 [v0.2.0]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.1.9...v0.2.0
+[v0.2.1]: https://github.com/pabllopf/Alis.Sample.Flappy.Bird/compare/v0.2.0...v0.2.1
