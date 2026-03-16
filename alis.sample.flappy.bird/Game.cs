@@ -10,7 +10,7 @@ namespace Alis.Sample.Flappy.Bird
 {
     public static class Game
     {
-        public static VideoGame Create()
+        public static VideoGame Create(string[] args)
         {
              return    VideoGame
                 .Create()
