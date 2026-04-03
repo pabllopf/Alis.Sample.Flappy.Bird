@@ -2,8 +2,36 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <RuntimeIdentifier>osx-arm64</RuntimeIdentifier>
         <TargetFramework>net9.0</TargetFramework>
+        
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU;x64;arm64;x86;WebAssembly</Platforms>
+    </PropertyGroup>
+
+    <!-- Configuración Debug -->
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <DebugType>full</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+        <Optimize>false</Optimize>
+    </PropertyGroup>
+
+    <!-- Configuración Release -->
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <DefineConstants>RELEASE;TRACE</DefineConstants>
+        <DebugType>pdbonly</DebugType>
+        <DebugSymbols>false</DebugSymbols>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+    
+    <!-- Configuración Debug -->
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|WebAssembly'">
+        <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+    </PropertyGroup>
+
+    <!-- Configuración Release -->
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|WebAssembly'">
+        <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
     </PropertyGroup>
     
     <ItemGroup>
