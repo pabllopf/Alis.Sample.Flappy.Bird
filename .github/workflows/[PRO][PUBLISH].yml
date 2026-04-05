@@ -78,11 +78,11 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 9.0.x
+          dotnet-version: 10.0.x
 
       - name: Publish NativeAOT binary
         run: |
-          dotnet publish -r ${{ matrix.rid }} -c Release -f net9.0 -o ./build_output/${{ matrix.rid }}_${{ matrix.arch }}/ -p:AssemblyVersion=$VERSION -p:PublishAot=true
+          dotnet publish -r ${{ matrix.rid }} -c Release -f net10.0 -o ./build_output/${{ matrix.rid }}_${{ matrix.arch }}/ -p:AssemblyVersion=$VERSION -p:PublishAot=true
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
