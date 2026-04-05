@@ -37,6 +37,8 @@
 [![](https://raw.githubusercontent.com/pabllopf/Alis.Sample.Flappy.Bird/refs/heads/master/docs/screenshots/Menu_FlappyBird.png)](https://raw.githubusercontent.com/pabllopf/Alis.Sample.Flappy.Bird/refs/heads/master/docs/screenshots/Menu_FlappyBird.png)
 [![](https://raw.githubusercontent.com/pabllopf/Alis.Sample.Flappy.Bird/refs/heads/master/docs/screenshots/Game_FlappyBird.png)](https://raw.githubusercontent.com/pabllopf/Alis.Sample.Flappy.Bird/refs/heads/master/docs/screenshots/Game_FlappyBird.png)
 
+https://pabllopf.github.io/Alis.Sample.Flappy.Bird/index.html
+
 ## 📖 Description
 
 Alis is a cross-platform framework designed to help developers create video games effortlessly. It includes a wide range
